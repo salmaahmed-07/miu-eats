@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIU Eats | Discover Campus Dining</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Desktop Navigation -->
+    <nav class="navbar top-nav">
+        <div class="logo-container" onclick="router.goHome()">
+            <img src="logos/miu-logo.png" alt="MIU Logo" class="logo-img">
+        </div>
+        <div class="search-container">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" class="main-search" placeholder="Search for food or places..." oninput="handleGlobalSearch(this.value)">
+        </div>
+        <div class="theme-switch" onclick="themeManager.toggle()">
+            <div class="circle">
+                <i data-lucide="sun" id="theme-icon-desktop" style="width: 14px; height: 14px;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="navbar bottom-nav">
+        <div class="nav-item active" data-page="home" onclick="router.goHome()">
+            <i data-lucide="home"></i>
+            <span>Home</span>
+        </div>
+        <div class="nav-item" onclick="themeManager.toggle()">
+            <i data-lucide="moon" id="theme-icon-mobile"></i>
+            <span>Theme</span>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Home Section -->
+        <section id="page-home" class="page-section">
+            <div class="hero">
+                <h1>Find your next meal on campus</h1>
+                <p>Discover the best food spots around MIU university</p>
+                <div class="btn-row">
+                    <button class="btn btn-surprise" onclick="surpriseMe()">
+                        <i data-lucide="sparkles"></i>
+                        Surprise Me
+                    </button>
+                    <button class="btn btn-surprise" style="background: var(--primary-red);" onclick="openBuildingModal()">
+                        <i data-lucide="map-pin"></i>
+                        Near Me
+                    </button>
+                </div>
+            </div>
+
+            <div id="home-categories-section">
+                <h3 style="margin: 30px 0 15px 0;">Explore Categories</h3>
+                <div class="category-filters">
+                    <div class="filter-chip active" data-category="all" onclick="filterByCategory('all')">All</div>
+                    <div class="filter-chip" data-category="food" onclick="filterByCategory('food')">Food Spots</div>
+                    <div class="filter-chip" data-category="dessert" onclick="filterByCategory('dessert')">Desserts</div>
+                    <div class="filter-chip" data-category="supermarket" onclick="filterByCategory('supermarket')">Supermarkets</div>
+                    <div class="filter-chip" data-category="drinks" onclick="filterByCategory('drinks')">Drinks</div>
+                </div>
+                <div class="places-grid" id="home-grid">
+                    <!-- Cards will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section (Alias for home) -->
+        <section id="page-categories" class="page-section">
+        </section>
+
+        <!-- Near Me Section -->
+        <section id="page-nearme" class="page-section">
+            <div id="nearme-grid" class="places-grid"></div>
+        </section>
+
+        <!-- Detail View Section -->
+        <section id="page-detail" class="page-section detail-view">
+            <div class="back-btn" onclick="router.back()">
+                <i data-lucide="arrow-left"></i>
+                Back
+            </div>
+            <div id="detail-content">
+                <!-- Content will be injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Building Selection Modal -->
+    <div id="building-modal" class="modal-overlay">
+        <div class="modal-content wide">
+            <h3 class="modal-title">Where are you?</h3>
+            <p class="modal-text">Select your building to find nearby food</p>
+            
+            <div class="building-grid">
+                <label class="building-option">
+                    <input type="radio" name="building" value="MainK" onchange="selectBuilding('MainK')">
+                    <div class="building-label"><i data-lucide="landmark"></i>Main & K</div>
+                </label>
+                <label class="building-option">
+                    <input type="radio" name="building" value="Pharmacy" onchange="selectBuilding('Pharmacy')">
+                    <div class="building-label"><i data-lucide="pill"></i>Pharmacy</div>
+                </label>
+                <label class="building-option">
+                    <input type="radio" name="building" value="NS" onchange="selectBuilding('NS')">
+                    <div class="building-label"><i data-lucide="graduation-cap"></i>N & S</div>
+                </label>
+                <label class="building-option">
+                    <input type="radio" name="building" value="R" onchange="selectBuilding('R')">
+                    <div class="building-label"><i data-lucide="graduation-cap"></i>R</div>
+                </label>
+            </div>
+
+            <div class="modal-actions">
+                <button class="modal-btn btn-cancel" onclick="closeModals()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Surprise Modal -->
+    <div id="surprise-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div id="modal-icon" style="font-size: 40px; margin-bottom: 16px;">😋</div>
+            <h3 class="modal-title">Check this out!</h3>
+            <p id="modal-message" class="modal-text">How about some delicious food?</p>
+            <div class="modal-actions">
+                <button class="modal-btn btn-cancel" onclick="closeModals()">Cancel</button>
+                <button class="modal-btn btn-confirm" id="modal-confirm-btn">Check it</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
