@@ -36,11 +36,11 @@
     <nav class="navbar bottom-nav">
         <div class="nav-item active" data-page="home" onclick="router.goHome()">
             <i data-lucide="home"></i>
-            <span>Home</span>
+            <span data-i18n="home">Home</span>
         </div>
-        <div class="nav-item" onclick="themeManager.toggle()">
-            <i data-lucide="moon" id="theme-icon-mobile"></i>
-            <span>Theme</span>
+        <div class="nav-item" onclick="toggleSettingsMenu()">
+            <i data-lucide="settings" id="settings-icon-mobile"></i>
+            <span data-i18n="settings">Settings</span>
         </div>
     </nav>
 
@@ -65,7 +65,7 @@
 
             <div id="home-categories-section">
                 <h3 style="margin: 30px 0 15px 0;">Explore Categories</h3>
-                <div class="category-filters">
+                <div class="category-filters home-filters">
                     <div class="filter-chip active" data-category="all" onclick="filterByCategory('all')">All</div>
                     <div class="filter-chip" data-category="food" onclick="filterByCategory('food')">Food Spots</div>
                     <div class="filter-chip" data-category="dessert" onclick="filterByCategory('dessert')">Desserts</div>
@@ -89,7 +89,7 @@
 
         <!-- Detail View Section -->
         <section id="page-detail" class="page-section detail-view">
-            <div class="back-btn" onclick="router.back()">
+            <div class="back-btn" onclick="router.back()" data-i18n="back">
                 <i data-lucide="arrow-left"></i>
                 Back
             </div>
@@ -135,12 +135,26 @@
     <div id="surprise-modal" class="modal-overlay">
         <div class="modal-content">
             <div id="modal-icon" style="font-size: 40px; margin-bottom: 16px;">😋</div>
-            <h3 class="modal-title">Check this out!</h3>
+            <h3 class="modal-title" data-i18n="surpriseTitle">Check this out!</h3>
             <p id="modal-message" class="modal-text">How about some delicious food?</p>
             <div class="modal-actions">
-                <button class="modal-btn btn-cancel" onclick="closeModals()">Cancel</button>
-                <button class="modal-btn btn-confirm" id="modal-confirm-btn">Check it</button>
+                <button class="modal-btn btn-cancel" onclick="closeModals()" data-i18n="cancel">Cancel</button>
+                <button class="modal-btn btn-confirm" id="modal-confirm-btn" data-i18n="checkIt">Check it</button>
             </div>
+        </div>
+    </div>
+
+    <!-- Settings Menu Popup -->
+    <div id="settings-menu" class="settings-overlay" onclick="if(event.target===this) toggleSettingsMenu()">
+        <div class="settings-popup">
+            <button class="settings-action-btn" onclick="toggleLanguage(); toggleSettingsMenu()">
+                <i data-lucide="languages"></i>
+                <span data-i18n="translateBtn" id="translate-btn-text">Translate to Arabic</span>
+            </button>
+            <button class="settings-action-btn" onclick="themeManager.toggle(); toggleSettingsMenu()">
+                <i data-lucide="moon" id="theme-icon-popup"></i>
+                <span data-i18n="themeBtn">Theme Options</span>
+            </button>
         </div>
     </div>
 
