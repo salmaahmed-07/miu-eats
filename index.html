@@ -144,6 +144,28 @@
         </div>
     </div>
 
+    <!-- Vote Modal -->
+    <div class="modal-overlay" id="vote-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Vote Busyness</h2>
+            <p class="modal-text" style="margin-bottom: 16px;">Vote if the place is busy or not.</p>
+            <div style="display: flex; flex-direction: row; justify-content: center; gap: 24px; margin-bottom: 24px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" name="busyness-vote" value="busy" style="width: 18px; height: 18px;">
+                    <span style="font-size: 16px; font-weight: 500;">Busy</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" name="busyness-vote" value="not-busy" style="width: 18px; height: 18px;">
+                    <span style="font-size: 16px; font-weight: 500;">Not Busy</span>
+                </label>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn btn-cancel" onclick="closeVoteModal()">Cancel</button>
+                <button class="modal-btn btn-confirm" onclick="submitVote()">Submit</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Settings Menu Popup -->
     <div id="settings-menu" class="settings-overlay" onclick="if(event.target===this) toggleSettingsMenu()">
         <div class="settings-popup">

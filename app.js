@@ -13,17 +13,96 @@ const DATA = {
             priceRange: 'LE 50–150',
             location: 'Building Main, Ground Floor',
             menu: [
-                { id: 'mc1', name: 'Classic Burger', price: 85, cat: 'Sandwiches', reactions: { fire: 12, thumb: 5 } },
-                { id: 'mc2', name: 'Chicken Wrap', price: 65, cat: 'Sandwiches', reactions: { fire: 8, thumb: 3 } },
-                { id: 'mc3', name: 'Chocolate Crepe', price: 55, cat: 'Crepes', reactions: { fire: 20, thumb: 15 } },
-                { id: 'mc4', name: 'Fresh Orange Juice', price: 35, cat: 'Beverages', reactions: { fire: 5, thumb: 10 } }
+                // Corner Crepe (Savory)
+                { id: 'mc_cr1', name: 'Burger (Mozzarella, Burger, Mushroom, BBQ, Caramelized Onion)', price: 130, cat: 'Corner Crepe (Savory)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_cr2', name: 'Chicken and Cheese (Crispy Chicken, Mozzarella, Cheddar, Peppers)', price: 130, cat: 'Corner Crepe (Savory)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_cr3', name: 'Super Crunchy (Mozzarella, Crispy Chicken, Turkey, Ranch)', price: 130, cat: 'Corner Crepe (Savory)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_cr4', name: 'Fries Cocktail (Mozzarella, Fries, Ketchup, Mayo)', price: 140, cat: 'Corner Crepe (Savory)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_cr5', name: 'Meat Cocktail (Mozzarella, Burger, Hot Dog, Salami, Peppers)', price: 140, cat: 'Corner Crepe (Savory)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_cr6', name: 'Nutella (Chocolate)', price: 50, cat: 'Corner Crepe (Savory)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_cr7', name: 'Nutella with Banana', price: 60, cat: 'Corner Crepe (Savory)', reactions: { fire: 0, thumb: 0 } },
+                // Meat Sandwiches
+                { id: 'mc_ms1', name: 'Alexandrian Liver', price: 70, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms2', name: 'Baladi Sojouk (Sausage)', price: 80, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms3', name: 'Meat Fajita', price: 90, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms4', name: 'Chicken Shish', price: 120, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms5', name: 'Crispy Chicken', price: 120, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms6', name: 'Chicken Ranch', price: 130, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms7', name: 'Chicken BBQ', price: 130, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms8', name: 'Jalapeño Crispy Chicken', price: 130, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ms9', name: 'Buffalo Chicken', price: 130, cat: 'Meat Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                // Fries Sandwiches
+                { id: 'mc_fs1', name: 'Fries', price: 20, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs2', name: 'Fries Chipsy', price: 20, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs3', name: 'Fries Pastrami', price: 30, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs4', name: 'Fries Ketchup', price: 25, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs5', name: 'Fries Mayo', price: 25, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs6', name: 'Fries Pizza', price: 35, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs7', name: 'Fries Cheese Sauce', price: 30, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs8', name: 'Fries Mix Cheese', price: 30, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs9', name: 'Fries Cocktail', price: 35, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_fs10', name: 'Fries Jalapeño', price: 30, cat: 'Fries Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                // Corner Foul & Falafel
+                { id: 'mc_ff1', name: 'Foul', price: 10, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff2', name: 'Foul with Hot Oil', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff3', name: 'Foul My Corner', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff4', name: 'Foul with Tomato', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff5', name: 'Alexandrian Foul', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff6', name: 'Foul with Olive Oil', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff7', name: 'Foul with Butter', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff8', name: 'Foul with Preserved Lemon', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff9', name: 'Foul with Eggs', price: 20, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff10', name: 'Falafel', price: 10, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff11', name: 'Stuffed Falafel', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff12', name: 'Falafel with Tomato', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff13', name: 'Falafel with Egg', price: 15, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff14', name: 'Falafel with Kiri Cheese', price: 25, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff15', name: 'Falafel with Fries', price: 20, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff16', name: 'Falafel with Eggplant', price: 20, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff17', name: 'Baba Ghanoush', price: 20, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ff18', name: 'Mousakaa', price: 25, cat: 'Corner Foul & Falafel', reactions: { fire: 0, thumb: 0 } },
+                // Corner Eggs
+                { id: 'mc_ce1', name: 'Plain Omelette', price: 10, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce2', name: 'Spanish Omelette', price: 15, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce3', name: 'Pastrami Omelette', price: 15, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce4', name: 'Sojouk Omelette', price: 15, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce5', name: 'Sausage Omelette', price: 15, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce6', name: 'Cheese Omelette', price: 15, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce7', name: 'Boiled Eggs', price: 15, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce8', name: 'Fried Eggs', price: 20, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ce9', name: 'Shakshuka', price: 20, cat: 'Corner Eggs', reactions: { fire: 0, thumb: 0 } },
+                // Salads & Appetizers
+                { id: 'mc_sa1', name: 'Pickles', price: 8, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_sa2', name: 'Pickled Eggplant', price: 15, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_sa3', name: 'Pickled Cucumber', price: 15, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_sa4', name: 'Pickled Tomato', price: 15, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_sa5', name: 'Baba Ghanoush', price: 20, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_sa6', name: 'Tehina', price: 20, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_sa7', name: 'Green Salad', price: 20, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_sa8', name: 'Torshi', price: 30, cat: 'Salads & Appetizers', reactions: { fire: 0, thumb: 0 } },
+                // Add-ons
+                { id: 'mc_ao1', name: 'Quraish Cheese', price: 20, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao2', name: 'Feta Cheese', price: 20, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao3', name: 'Old Cheese (Mish)', price: 25, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao4', name: 'Roumi Cheese', price: 30, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao5', name: 'White Cheese with Tomato', price: 30, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao6', name: 'Pastrami', price: 15, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao7', name: 'Sojouk', price: 15, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao8', name: 'Sausage', price: 15, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao9', name: 'Baba Ghanoush', price: 10, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao10', name: 'Tehina', price: 7, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao11', name: 'Roumi Cheese', price: 10, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao12', name: 'Cheddar Cheese', price: 15, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao13', name: 'Mushroom', price: 15, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao14', name: 'Kiri Cheese', price: 15, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } },
+                { id: 'mc_ao15', name: 'Eggs', price: 12, cat: 'Add-ons', reactions: { fire: 0, thumb: 0 } }
             ]
         },
         {
             id: 'r-to-go',
             name: 'R to Go',
             category: 'food',
-            image: 'logos/RtoGo-logo.jpeg',
+            image: 'logos/RtoGo-logo.png',
             buildings: ['MainK'],
             openingHours: { open: 7, close: 16 },
             priceRange: 'LE 20–120',
@@ -308,15 +387,93 @@ const DATA = {
             id: 'cinnabon',
             name: 'Cinnabon',
             category: 'dessert',
-            image: 'logos/Cinnabon-logo.png',
+            image: 'logos/Cinnabon-logo.webp',
             buildings: ['NS'],
             openingHours: { open: 10, close: 18 },
             priceRange: 'LE 50–120',
             location: 'Main Building Food Court',
             menu: [
-                { id: 'cin1', name: 'Classic Roll', price: 85, cat: 'Rolls', reactions: { fire: 100, thumb: 80 } },
-                { id: 'cin2', name: 'Minibon', price: 60, cat: 'Minibons', reactions: { fire: 40, thumb: 30 } },
-                { id: 'cin3', name: 'Iced Latte', price: 55, cat: 'Coffee', reactions: { fire: 10, thumb: 12 } }
+                // Baked Goods - Signature Cinnamon Rolls
+                { id: 'cin_bg1', name: 'Cinnabon (Classic)', price: 128, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg2', name: 'Cinnabon (MiniBon)', price: 91, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg3', name: 'Cinnabon (BonBites)', price: 89, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg4', name: 'ChocoBon (Classic)', price: 149, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg5', name: 'ChocoBon (MiniBon)', price: 99, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg6', name: 'ChocoBon (BonBites)', price: 98, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg7', name: 'Caramel PecanBon (Classic)', price: 179, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg8', name: 'Caramel PecanBon (MiniBon)', price: 122, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg9', name: 'Caramel PecanBon (BonBites)', price: 120, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg10', name: 'Choco PecanBon (Classic)', price: 180, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg11', name: 'Choco PecanBon (MiniBon)', price: 122, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg12', name: 'Choco PecanBon (BonBites)', price: 120, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_bg13', name: 'Caramel (Classic)', price: 149, cat: 'Baked Goods', reactions: { fire: 0, thumb: 0 } },
+                // Special Treats - Roll On the Go
+                { id: 'cin_st1', name: 'Cinnabon', price: 100, cat: 'Special Treats', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_st2', name: 'Caramel', price: 100, cat: 'Special Treats', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_st3', name: 'Choco', price: 100, cat: 'Special Treats', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_st4', name: 'Choco Pecan', price: 138, cat: 'Special Treats', reactions: { fire: 0, thumb: 0 } },
+                // Our Combos
+                { id: 'cin_cb1', name: 'Mini Combo (Minibon & regular coffee)', price: 148, cat: 'Combos', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_cb2', name: 'Chillatta on the go (Roll-on-the-go & regular chillatta)', price: 175, cat: 'Combos', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_cb3', name: 'Share Bites (4 bonbites & 2 regular coffee)', price: 223, cat: 'Combos', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_cb4', name: 'Double Minis (2 minibon & 2 regular coffee)', price: 284, cat: 'Combos', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_cb5', name: 'Joe on the go (Roll-on-the-go & small coffee)', price: 132, cat: 'Combos', reactions: { fire: 0, thumb: 0 } },
+                // Hot Coffee
+                { id: 'cin_hc1', name: 'Latte (Small)', price: 73, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc2', name: 'Latte (Regular)', price: 85, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc3', name: 'Latte (Large)', price: 95, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc4', name: 'Cappuccino (Small)', price: 73, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc5', name: 'Cappuccino (Regular)', price: 85, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc6', name: 'Cappuccino (Large)', price: 95, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc7', name: 'Flat white (Regular)', price: 86, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc8', name: 'Mocha (Regular)', price: 92, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc9', name: 'Mocha (Large)', price: 110, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc10', name: 'Americano (Regular)', price: 65, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc11', name: 'Americano (Large)', price: 78, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc12', name: 'Makara Cinnamon Latte (Regular)', price: 87, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc13', name: 'Makara Cinnamon Latte (Large)', price: 115, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc14', name: 'Cinnamon Roll Cappuccino (Regular)', price: 93, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc15', name: 'Cinnamon Roll Latte (Regular)', price: 98, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc16', name: 'Toffee Nut Latte (Regular)', price: 98, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc17', name: 'Espresso (Single)', price: 50, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc18', name: 'Espresso (Double)', price: 67, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc19', name: 'Espresso macchiato', price: 61, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc20', name: 'Espresso con panna', price: 61, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc21', name: 'Turkish coffee (Single)', price: 55, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_hc22', name: 'Turkish coffee (Double)', price: 72, cat: 'Hot Coffee', reactions: { fire: 0, thumb: 0 } },
+                // Iced Coffee
+                { id: 'cin_ic1', name: 'Makara Cinnamon Latte (Regular)', price: 87, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic2', name: 'Makara Cinnamon Latte (Large)', price: 115, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic3', name: 'Cinnamon Roll Cold Brew (Regular)', price: 92, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic4', name: 'Chocolate Cookies Cold Brew (Regular)', price: 92, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic5', name: 'Toffee Nut Cold Brew (Regular)', price: 92, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic6', name: 'Cold Brew (Regular)', price: 82, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic7', name: 'Iced Latte (Regular)', price: 85, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic8', name: 'Iced Latte (Large)', price: 95, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic9', name: 'Iced Mocha (Regular)', price: 92, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ic10', name: 'Iced Mocha (Large)', price: 110, cat: 'Iced Coffee', reactions: { fire: 0, thumb: 0 } },
+                // Hot / Iced Chocolate
+                { id: 'cin_ch1', name: 'Signature Iced Chocolate (Regular)', price: 92, cat: 'Hot / Iced Chocolate', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ch2', name: 'Signature Iced Chocolate (Large)', price: 110, cat: 'Hot / Iced Chocolate', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ch3', name: 'Signature Hot Chocolate (Regular)', price: 98, cat: 'Hot / Iced Chocolate', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ch4', name: 'Signature Hot Chocolate (Large)', price: 115, cat: 'Hot / Iced Chocolate', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_ch5', name: 'Raspberry Hot Chocolate', price: 140, cat: 'Hot / Iced Chocolate', reactions: { fire: 0, thumb: 0 } },
+                // Chillattas - Frozen Blended Beverages
+                { id: 'cin_fb1', name: 'Strawberry (Regular)', price: 103, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb2', name: 'Strawberry (Large)', price: 120, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb3', name: 'Strawberry Banana (Regular)', price: 103, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb4', name: 'Strawberry Banana (Large)', price: 120, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb5', name: 'Tropical Blast (Regular)', price: 103, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb6', name: 'Tropical Blast (Large)', price: 120, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb7', name: 'Cappuccino (Regular)', price: 103, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb8', name: 'Cappuccino (Large)', price: 120, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb9', name: 'Cookies & Cream (Regular)', price: 103, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb10', name: 'Cookies & Cream (Large)', price: 120, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb11', name: 'Caramel Banana (Regular)', price: 103, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_fb12', name: 'Caramel Banana (Large)', price: 120, cat: 'Chillattas', reactions: { fire: 0, thumb: 0 } },
+                // Lemonattas
+                { id: 'cin_lm1', name: 'Plain', price: 61, cat: 'Lemonattas', reactions: { fire: 0, thumb: 0 } },
+                { id: 'cin_lm2', name: 'Strawberry - Raspberry', price: 77, cat: 'Lemonattas', reactions: { fire: 0, thumb: 0 } }
             ]
         },
         {
@@ -374,9 +531,49 @@ const DATA = {
             priceRange: 'LE 40–100',
             location: 'Building R Square',
             menu: [
-                { id: 'man1', name: 'Zaatar Manoucheh', price: 45, cat: 'Manoucheh', reactions: { fire: 25, thumb: 15 } },
-                { id: 'man2', name: 'Cheese Fatayer', price: 55, cat: 'Fatayer', reactions: { fire: 30, thumb: 20 } },
-                { id: 'man3', name: 'Ayran', price: 25, cat: 'Drinks', reactions: { fire: 5, thumb: 10 } }
+                // Main Items (Manakish & Wraps)
+                { id: 'man_m1', name: 'Zaatar', price: 75.24, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m2', name: 'Zaatar with Labneh', price: 78.66, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m3', name: 'Zaatar with Mozzarella', price: 85.50, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m4', name: 'Zaatar with Halloumi', price: 92.34, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m5', name: 'Chicken Shawarma', price: 109.44, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m6', name: 'Meat Shawarma', price: 108.30, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m7', name: 'Chicken and Cheese', price: 109.44, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m8', name: 'Chicken Fajita', price: 109.44, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m9', name: 'Lahm Bi Ajeen (Meat with Dough)', price: 85.50, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m10', name: 'Sojouk and Cheese', price: 109.44, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m11', name: 'Philadelphia Steak', price: 108.30, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m12', name: 'Halloumi', price: 92.34, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m13', name: 'Cheese and Turkey Ham', price: 98.04, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m14', name: 'Cheese and Hot Dog (Ketchup & Mayo)', price: 98.04, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m15', name: 'Cheese and Pastrami', price: 98.04, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m16', name: 'Turkey Cheese', price: 103.74, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m17', name: 'Mix Cheese (Halloumi + Mozzarella)', price: 96.90, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m18', name: 'Labneh', price: 79.80, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m19', name: 'Mozzarella Cheese', price: 79.80, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m20', name: 'Special Kofta XXL', price: 139.08, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m21', name: 'Special Chicken XXL', price: 139.08, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m22', name: 'Special Tuna XXL', price: 139.08, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_m23', name: 'Special Sojouk XXL', price: 139.08, cat: 'Main Items (Manakish & Wraps)', reactions: { fire: 0, thumb: 0 } },
+                // Pizza
+                { id: 'man_p1', name: 'Pizza Virgin', price: 108.30, cat: 'Pizza', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_p2', name: 'Pizza Regular', price: 120.84, cat: 'Pizza', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_p3', name: 'Pizza Extra', price: 132.24, cat: 'Pizza', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_p4', name: 'Pizza Extreme', price: 132.24, cat: 'Pizza', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_p5', name: 'Chicken Pizza', price: 136.80, cat: 'Pizza', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_p6', name: 'Tuna Pizza', price: 136.80, cat: 'Pizza', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_p7', name: 'Spinach Pizza', price: 85.50, cat: 'Pizza', reactions: { fire: 0, thumb: 0 } },
+                // Small Pastries (Mini)
+                { id: 'man_sp1', name: 'Mini Zaatar', price: 18.24, cat: 'Small Pastries (Mini)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_sp2', name: 'Mini Sfeeha (Meat)', price: 18.24, cat: 'Small Pastries (Mini)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_sp3', name: 'Mini Spinach', price: 18.24, cat: 'Small Pastries (Mini)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_sp4', name: 'Mini Halloumi', price: 18.24, cat: 'Small Pastries (Mini)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_sp5', name: 'Mini Hot Dog', price: 18.24, cat: 'Small Pastries (Mini)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_sp6', name: 'Mini Muhammara and Cheese', price: 18.24, cat: 'Small Pastries (Mini)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_sp7', name: 'Small Pizza', price: 18.24, cat: 'Small Pastries (Mini)', reactions: { fire: 0, thumb: 0 } },
+                // Drinks
+                { id: 'man_d1', name: 'Cola', price: 20, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'man_d2', name: 'Small Mineral Water', price: 10, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } }
             ]
         },
         {
@@ -389,9 +586,41 @@ const DATA = {
             priceRange: 'LE 60–130',
             location: 'Building S Plaza',
             menu: [
-                { id: 'gy1', name: 'Gyro Platter', price: 130, cat: 'Platters', reactions: { fire: 40, thumb: 25 } },
-                { id: 'gy2', name: 'Chicken Gyro Wrap', price: 85, cat: 'Wraps', reactions: { fire: 35, thumb: 15 } },
-                { id: 'gy3', name: 'Tzatziki Dip', price: 25, cat: 'Sides', reactions: { fire: 10, thumb: 12 } }
+                // GYROS
+                { id: 'gy_g1', name: 'Shawarma (Gyro)', price: 130, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_g2', name: 'Shish (Souvlaki)', price: 130, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_g3', name: 'Crispy Strips', price: 130, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_g4', name: 'Beef Patty (Bifteki)', price: 130, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_g5', name: 'Kofta', price: 130, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_g6', name: 'Hot Dog', price: 100, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_g7', name: 'Pita Fries', price: 70, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_g8', name: 'Pita Cheese Fries', price: 80, cat: 'Gyros', reactions: { fire: 0, thumb: 0 } },
+                // MEALS
+                { id: 'gy_m1', name: 'Grilled Chicken', price: 180, cat: 'Meals', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_m2', name: 'Crispy Strips', price: 180, cat: 'Meals', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_m3', name: 'Gyro Mix', price: 200, cat: 'Meals', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_m4', name: 'Kofta', price: 180, cat: 'Meals', reactions: { fire: 0, thumb: 0 } },
+                // BURGERS
+                { id: 'gy_b1', name: 'Classic Burger', price: 135, cat: 'Burgers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_b2', name: 'Cheese Burger', price: 145, cat: 'Burgers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_b3', name: 'Mushroom and Cheese Burger', price: 160, cat: 'Burgers', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_b4', name: 'Chicken Burger', price: 135, cat: 'Burgers', reactions: { fire: 0, thumb: 0 } },
+                // OTHER
+                { id: 'gy_o1', name: 'Fries Gyro (Packet)', price: 40, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_o2', name: 'Honey Mustard Fries', price: 50, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_o3', name: 'Cheese Fries', price: 50, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_o4', name: 'Crispyro', price: 130, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_o5', name: 'Ranchiro', price: 105, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_o6', name: 'Chillo', price: 105, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_o7', name: 'Buffalo Wings', price: 90, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_o8', name: 'Rizo', price: 110, cat: 'Other', reactions: { fire: 0, thumb: 0 } },
+                // EXTRA
+                { id: 'gy_e1', name: 'Extra Sauce', price: 15, cat: 'Extra', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_e2', name: 'Extra Mushroom', price: 25, cat: 'Extra', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_e3', name: 'Extra Jalapeno', price: 15, cat: 'Extra', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_e4', name: 'Extra Chicken', price: 55, cat: 'Extra', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_e5', name: 'Extra Burger', price: 65, cat: 'Extra', reactions: { fire: 0, thumb: 0 } },
+                { id: 'gy_e6', name: 'Extra Cheese', price: 20, cat: 'Extra', reactions: { fire: 0, thumb: 0 } }
             ]
         },
         {
@@ -404,8 +633,99 @@ const DATA = {
             priceRange: 'LE 20–70',
             location: 'Main Building Entrance',
             menu: [
-                { id: 'fg1', name: 'Mango Juice', price: 40, cat: 'Fresh Juices', reactions: { fire: 60, thumb: 40 } },
-                { id: 'fg2', name: 'Strawberry Smoothy', price: 50, cat: 'Smoothies', reactions: { fire: 30, thumb: 20 } }
+                // Juices
+                { id: 'fgh_j1', name: 'Orange', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j2', name: 'Carrot + Orange', price: 30, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j3', name: 'Cantaloupe', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j4', name: 'Guava', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j5', name: 'Strawberry', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j6', name: 'Tangerine', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j7', name: 'Watermelon', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j8', name: 'Mango', price: 30, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j9', name: 'Banana', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j10', name: 'Pomegranate', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j11', name: 'Lemon', price: 20, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j12', name: 'Lemon Mint', price: 25, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j13', name: 'Lemon Mint + 7Up', price: 30, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j14', name: 'Prickly Pear', price: 25, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j15', name: 'Dates with Milk', price: 30, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j16', name: 'Peach', price: 30, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j17', name: 'Pineapple', price: 35, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_j18', name: 'Apple', price: 35, cat: 'Juices', reactions: { fire: 0, thumb: 0 } },
+                // Smoothies
+                { id: 'fgh_s1', name: 'Mango', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s2', name: 'Watermelon', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s3', name: 'Kiwi', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s4', name: 'Lemon', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s5', name: 'Pineapple', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s6', name: 'Cherry', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s7', name: 'Peach', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s8', name: 'Caramel', price: 40, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s9', name: 'Apple', price: 45, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s10', name: 'Mix Smoothie', price: 45, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_s11', name: 'Chocolate Banana Smoothie', price: 45, cat: 'Smoothies', reactions: { fire: 0, thumb: 0 } },
+                // Diet Mixes
+                { id: 'fgh_dm1', name: 'Kiwi + Pineapple', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm2', name: 'Apple + Pineapple', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm3', name: 'Carrot + Beet', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm4', name: 'Pomegranate + Beet', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm5', name: 'Peach + Orange', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm6', name: 'Carrot + Orange', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm7', name: 'Pineapple + Orange', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm8', name: 'Kiwi + Orange', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_dm9', name: 'Apple + Orange', price: 40, cat: 'Diet Mixes', reactions: { fire: 0, thumb: 0 } },
+                // Mango Mixes
+                { id: 'fgh_mm1', name: 'Mango Farghaly', price: 30, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mm2', name: 'Hawaii (Mango + Banana pieces)', price: 40, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mm3', name: 'Romeo & Juliet (Mango + Pomegranate)', price: 40, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mm4', name: 'Ads (Mango + Ice Cream + Banana)', price: 40, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mm5', name: 'Mango Pineapple Juice', price: 40, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mm6', name: 'Mango Peach Juice', price: 40, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mm7', name: 'Mango Watermelon Juice', price: 40, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mm8', name: 'Mango Chunks', price: 40, cat: 'Mango Mixes', reactions: { fire: 0, thumb: 0 } },
+                // Vegetable Juices
+                { id: 'fgh_vj1', name: 'Arugula', price: 25, cat: 'Vegetable Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_vj2', name: 'Carrot', price: 25, cat: 'Vegetable Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_vj3', name: 'Kiwi', price: 50, cat: 'Vegetable Juices', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_vj4', name: 'Avocado', price: 55, cat: 'Vegetable Juices', reactions: { fire: 0, thumb: 0 } },
+                // Salads
+                { id: 'fgh_sa1', name: 'Fruit Salad Box', price: 50, cat: 'Salads', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_sa2', name: 'Fruit Salad Cup', price: 40, cat: 'Salads', reactions: { fire: 0, thumb: 0 } },
+                // Yogurt
+                { id: 'fgh_yg1', name: 'Plain Yogurt', price: 25, cat: 'Yogurt', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_yg2', name: 'Fruit Yogurt', price: 35, cat: 'Yogurt', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_yg3', name: 'Honey Yogurt', price: 35, cat: 'Yogurt', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_yg4', name: 'Berry Yogurt', price: 35, cat: 'Yogurt', reactions: { fire: 0, thumb: 0 } },
+                // Chocolates
+                { id: 'fgh_ch1', name: 'Borio', price: 40, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch2', name: 'Oreo', price: 50, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch3', name: 'Kit Kat', price: 55, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch4', name: 'Borio + Kit Kat', price: 55, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch5', name: 'Borio + Peanuts', price: 55, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch6', name: 'Snickers', price: 55, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch7', name: 'M&M\'s', price: 50, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch8', name: 'Hohos', price: 45, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ch9', name: 'Twinkies', price: 45, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
+                // Milkshakes
+                { id: 'fgh_ms1', name: 'Vanilla', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ms2', name: 'Chocolate', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ms3', name: 'Nutella', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ms4', name: 'Oreo', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ms5', name: 'Kiwi', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ms6', name: 'Watermelon', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ms7', name: 'Mango', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ms8', name: 'Strawberry', price: 40, cat: 'Milkshakes', reactions: { fire: 0, thumb: 0 } },
+                // Ice Coffee
+                { id: 'fgh_ic1', name: 'Ice Mocha', price: 45, cat: 'Ice Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ic2', name: 'Chocolate Ice Mocha', price: 50, cat: 'Ice Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ic3', name: 'Caramel Ice Mocha', price: 50, cat: 'Ice Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ic4', name: 'Ice Latte', price: 50, cat: 'Ice Coffee', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_ic5', name: 'Borio Mocha', price: 50, cat: 'Ice Coffee', reactions: { fire: 0, thumb: 0 } },
+                // Nuts
+                { id: 'fgh_nt1', name: 'Peanuts (Chocolate / Vanilla)', price: 50, cat: 'Nuts', reactions: { fire: 0, thumb: 0 } },
+                // Miscellaneous
+                { id: 'fgh_mi1', name: 'Mineral Water', price: 7, cat: 'Miscellaneous', reactions: { fire: 0, thumb: 0 } },
+                { id: 'fgh_mi2', name: 'Hummus El Sham', price: 25, cat: 'Miscellaneous', reactions: { fire: 0, thumb: 0 } }
             ]
         },
         {
@@ -418,9 +738,44 @@ const DATA = {
             priceRange: 'LE 30–90',
             location: 'Building K Garden',
             menu: [
-                { id: 'bt1', name: 'Mix Cheese Fries', price: 55, cat: 'Fries', reactions: { fire: 80, thumb: 50 } },
-                { id: 'bt2', name: 'Zalabya 12 pcs', price: 45, cat: 'Zalabya', reactions: { fire: 60, thumb: 45 } },
-                { id: 'bt3', name: 'Ranch Sauce', price: 10, cat: 'Dips', reactions: { fire: 5, thumb: 5 } }
+                // Corn Dog
+                { id: 'bz_cd1', name: 'Big Corn Dog', price: 120, cat: 'Corn Dog', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_cd2', name: 'Corn Dog', price: 55, cat: 'Corn Dog', reactions: { fire: 0, thumb: 0 } },
+                // Sandwiches
+                { id: 'bz_sw1', name: 'Big Chicken Combo', price: 165, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw2', name: 'Big Chicken', price: 120, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw3', name: 'Large Strips', price: 120, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw4', name: 'Medium Strips', price: 70, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw5', name: 'Big Dog Sandwich', price: 120, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw6', name: 'Corn Dog Sandwich', price: 70, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw7', name: 'Hot Dog Sandwich', price: 65, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw8', name: 'Fries Sandwich', price: 45, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sw9', name: 'Small Fries Sandwich', price: 35, cat: 'Sandwiches', reactions: { fire: 0, thumb: 0 } },
+                // Fries (Batates)
+                { id: 'bz_f1', name: 'Jumbo Fries', price: 65, cat: 'Fries (Batates)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_f2', name: 'Large Fries', price: 50, cat: 'Fries (Batates)', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_f3', name: 'Medium Fries', price: 40, cat: 'Fries (Batates)', reactions: { fire: 0, thumb: 0 } },
+                // Zalabya
+                { id: 'bz_z1', name: 'Classic Small Zalabya (Honey)', price: 40, cat: 'Zalabya', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_z2', name: 'Zalabya Plus Small', price: 50, cat: 'Zalabya', reactions: { fire: 0, thumb: 0 } },
+                // Snacks
+                { id: 'bz_sn1', name: 'Strips Snack (Fries and Strips)', price: 120, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sn2', name: 'Sambousek Snack (Fries and Sambousek)', price: 105, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_sn3', name: 'Sambousek Box (8 pieces)', price: 120, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
+                // Drinks
+                { id: 'bz_d1', name: 'Cans', price: 20, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d2', name: 'Water', price: 10, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d3', name: 'Sun Top', price: 15, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d4', name: 'Coffee Shake', price: 30, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d5', name: 'Chocolate Drink', price: 25, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d6', name: 'Mango Juice', price: 50, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d7', name: 'Juices (Orange / Strawberry / Guava)', price: 40, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d8', name: 'Juhayna Pure', price: 25, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_d9', name: 'Juhayna Pure Mango Peach', price: 30, cat: 'Drinks', reactions: { fire: 0, thumb: 0 } },
+                // Extra Sauces
+                { id: 'bz_es1', name: 'Extra Sambousek', price: 15, cat: 'Extra Sauces', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_es2', name: 'Cheddar Cheese', price: 10, cat: 'Extra Sauces', reactions: { fire: 0, thumb: 0 } },
+                { id: 'bz_es3', name: 'Sauces (Dragon Hot / 1000 Island / Texas)', price: 10, cat: 'Extra Sauces', reactions: { fire: 0, thumb: 0 } }
             ]
         },
         {
@@ -448,6 +803,7 @@ const DATA = {
             priceRange: 'LE 5–55',
             location: 'Main Building, Upper Floor',
             menu: [
+                // Hot Drinks
                 { id: 'lf_hd1', name: 'Nestle', price: 30, cat: 'Hot Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_hd2', name: 'Gold', price: 30, cat: 'Hot Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_hd3', name: 'Cadbury Hot Chocolate', price: 30, cat: 'Hot Drinks', reactions: { fire: 0, thumb: 0 } },
@@ -463,17 +819,21 @@ const DATA = {
                 { id: 'lf_hd13', name: 'Espresso', price: 25, cat: 'Hot Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_hd14', name: 'Gold Black', price: 20, cat: 'Hot Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_hd15', name: 'Ahmed Tea', price: 20, cat: 'Hot Drinks', reactions: { fire: 0, thumb: 0 } },
+                // Tea
                 { id: 'lf_t1', name: 'Green Tea Mint', price: 20, cat: 'Tea', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_t2', name: 'Green Tea Apple', price: 20, cat: 'Tea', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_t3', name: 'Green Tea', price: 15, cat: 'Tea', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_t4', name: 'Lipton Tea', price: 15, cat: 'Tea', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_t5', name: 'Lipton Mint', price: 15, cat: 'Tea', reactions: { fire: 0, thumb: 0 } },
+                // Cold Drinks
                 { id: 'lf_cd1', name: 'Mineral Water', price: 10, cat: 'Cold Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_cd2', name: 'Pepsi Cola', price: 25, cat: 'Cold Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_cd3', name: 'Juice', price: 15, cat: 'Cold Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_cd4', name: 'Mix Juice', price: 20, cat: 'Cold Drinks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_cd5', name: 'Sun Top', price: 20, cat: 'Cold Drinks', reactions: { fire: 0, thumb: 0 } },
-                { id: 'lf_sn1', name: 'Chipsy', price: 15, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
+                // Snacks
+                { id: 'lf_sn1_s', name: 'Chipsy (Small)', price: 15, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
+                { id: 'lf_sn1_l', name: 'Chipsy (Large)', price: 20, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_sn2', name: 'Chipsy Forno', price: 20, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_sn3', name: 'Fairouz', price: 25, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_sn4', name: 'Bake Rolls Medium', price: 15, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
@@ -490,6 +850,7 @@ const DATA = {
                 { id: 'lf_sn15', name: 'Mentos', price: 20, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_sn16', name: 'Chiclets', price: 15, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_sn17', name: 'Tissues', price: 5, cat: 'Snacks', reactions: { fire: 0, thumb: 0 } },
+                // Chocolates
                 { id: 'lf_ch1', name: 'Galaxy', price: 55, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_ch2', name: 'Snickers', price: 55, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
                 { id: 'lf_ch3', name: 'Bounty', price: 55, cat: 'Chocolates', reactions: { fire: 0, thumb: 0 } },
@@ -655,7 +1016,7 @@ function renderGrid(containerId, items) {
                         <span class="status-badge ${isOpen ? 'status-open' : 'status-closed'}">${isOpen ? 'Open' : 'Closed'}</span>
                     </div>
                     <div class="place-info" style="margin-bottom: 4px;">
-                        <span>${place.location}</span>
+                        ${getBusynessIndicator(place.id)}
                     </div>
                     <div class="price-range" style="font-size: 12px;">${place.priceRange}</div>
                 </div>
@@ -684,9 +1045,24 @@ function renderDetail() {
                     <img src="${place.image}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='logos/miu-logo.png'">
                 </div>
                 <div>
-                    <h1 style="font-size: 28px;">${place.name}</h1>
-                    <p style="opacity: 0.8; margin-bottom: 8px;">${place.category.toUpperCase()} • ${place.location}</p>
-                    <span class="status-badge ${isOpen ? 'status-open' : 'status-closed'}">${isOpen ? 'Open now' : 'Closed'}</span>
+                    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; flex-wrap: wrap;">
+                        <h1 style="font-size: 28px; margin: 0; line-height: 1.1;">${place.name}</h1>
+                        ${((() => {
+                            const lastVoted = localStorage.getItem(`lastVoted_${place.id}`);
+                            const voteDisabled = lastVoted && (Date.now() - parseInt(lastVoted)) < 10 * 60 * 1000;
+                            return voteDisabled 
+                                ? `<button class="btn btn-primary" style="padding: 10px 28px; font-size: 15px; border-radius: 50px; background-color: var(--gray-medium); color: var(--text-color); border: 1px solid var(--gray-medium); opacity: 0.6; cursor: not-allowed;" disabled>Voted</button>`
+                                : `<button id="vote-btn-${place.id}" class="btn btn-primary" style="padding: 10px 28px; font-size: 15px; border-radius: 50px;" onclick="openVoteModal('${place.id}')">Vote</button>`;
+                        })())}
+                    </div>
+                    <div style="opacity: 0.8; margin-bottom: 12px; display: flex; flex-direction: column; gap: 6px;">
+                        <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                            <span>${place.category.toUpperCase()}</span> ${getBusynessIndicator(place.id)}
+                        </div>
+                        <div>
+                            <span class="status-badge ${isOpen ? 'status-open' : 'status-closed'}">${isOpen ? 'Open now' : 'Closed'}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -798,6 +1174,112 @@ function filterByCategory(cat) {
     });
     renderGrid('home-grid', filterData());
     if (window.lucide) lucide.createIcons();
+}
+
+function getBusynessIndicator(placeId) {
+    const statusData = JSON.parse(localStorage.getItem(`placeStatus_${placeId}`) || 'null');
+    let activeStatus = 'green';
+    
+    if (statusData) {
+        const elapsed = Date.now() - statusData.timestamp;
+        if (statusData.status === 'red' && elapsed < 60 * 60 * 1000) {
+            activeStatus = 'red';
+        } else if (statusData.status === 'yellow' && elapsed < 30 * 60 * 1000) {
+            activeStatus = 'yellow';
+        }
+    }
+    
+    let text, cssClass;
+    if (activeStatus === 'red') {
+        text = 'Busy';
+        cssClass = 'status-red';
+    } else if (activeStatus === 'yellow') {
+        text = 'Bit Busy';
+        cssClass = 'status-yellow';
+    } else {
+        text = 'Safe to Go';
+        cssClass = 'status-green';
+    }
+    
+    return `
+        <div class="busyness-indicator ${cssClass}">
+            <div class="busyness-dot"></div>
+            <span class="busyness-text">${text}</span>
+        </div>
+    `;
+}
+
+let currentVotePlaceId = null;
+
+function openVoteModal(placeId) {
+    const lastVoted = localStorage.getItem(`lastVoted_${placeId}`);
+    if (lastVoted && (Date.now() - parseInt(lastVoted)) < 10 * 60 * 1000) {
+        return;
+    }
+    currentVotePlaceId = placeId;
+    const modal = document.getElementById('vote-modal');
+    if (modal) {
+        modal.classList.add('active');
+        document.querySelectorAll('input[name="busyness-vote"]').forEach(r => r.checked = false);
+    }
+}
+
+function closeVoteModal() {
+    const modal = document.getElementById('vote-modal');
+    if (modal) {
+        modal.classList.remove('active');
+    }
+    currentVotePlaceId = null;
+}
+
+function submitVote() {
+    if (!currentVotePlaceId) return;
+    const selected = document.querySelector('input[name="busyness-vote"]:checked');
+    if (!selected) {
+        alert("Please select an option.");
+        return;
+    }
+    
+    const voteType = selected.value; // 'busy' or 'not-busy'
+    
+    let votes = JSON.parse(localStorage.getItem(`votes_${currentVotePlaceId}`) || '[]');
+    votes.push({ timestamp: Date.now(), type: voteType });
+    localStorage.setItem(`votes_${currentVotePlaceId}`, JSON.stringify(votes));
+    
+    localStorage.setItem(`lastVoted_${currentVotePlaceId}`, Date.now().toString());
+    const placeIdToUpdate = currentVotePlaceId;
+    
+    evaluateBusyness(placeIdToUpdate);
+    
+    closeVoteModal();
+    
+    if (currentState.currentPage === 'detail' && currentState.selectedPlace === placeIdToUpdate) {
+        renderDetail();
+    }
+    renderGrid('home-grid', filterData());
+    if (window.lucide) lucide.createIcons();
+}
+
+function evaluateBusyness(placeId) {
+    const votes = JSON.parse(localStorage.getItem(`votes_${placeId}`) || '[]');
+    const oneHourAgo = Date.now() - 60 * 60 * 1000;
+    
+    const recentBusyVotes = votes.filter(v => v.timestamp >= oneHourAgo && v.type === 'busy').length;
+    
+    const currentStatus = JSON.parse(localStorage.getItem(`placeStatus_${placeId}`) || 'null');
+    let newStatus = null;
+    
+    if (recentBusyVotes >= 12) {
+        newStatus = { status: 'red', timestamp: Date.now() };
+    } else if (recentBusyVotes >= 8) {
+        if (!currentStatus || currentStatus.status !== 'red' || (Date.now() - currentStatus.timestamp) >= 60 * 60 * 1000) {
+            newStatus = { status: 'yellow', timestamp: Date.now() };
+        }
+    }
+    
+    if (newStatus) {
+        localStorage.setItem(`placeStatus_${placeId}`, JSON.stringify(newStatus));
+    }
 }
 
 function handleGlobalSearch(query) {
@@ -1028,7 +1510,7 @@ function updateTranslations() {
         titles[0].innerText = tr('heroTitle');
         const sub = titles[0].nextElementSibling;
         if (sub) sub.innerText = tr('heroSubtitle');
-        
+
         // Translate buttons inside hero
         const surpriseBtn = document.querySelector('.hero .btn-surprise:not([style])');
         if (surpriseBtn) {
@@ -1062,7 +1544,7 @@ function updateTranslations() {
 
 // Intercept router UI updates to re-apply translations
 const originalUpdateUI = router.updateUI;
-router.updateUI = function() {
+router.updateUI = function () {
     originalUpdateUI.call(router);
     setTimeout(updateTranslations, 50);
 };
