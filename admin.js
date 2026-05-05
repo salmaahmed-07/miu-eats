@@ -86,27 +86,35 @@ function renderMenuList(menu) {
         return;
     }
 
-    list.innerHTML = menu.map((item, index) => `
-        <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition group">
-            <div class="flex items-center gap-4">
-                <div class="w-10 h-10 bg-white dark:bg-gray-800 rounded-xl flex items-center justify-center font-bold text-gray-400 border border-gray-100 dark:border-gray-700">
-                    ${index + 1}
+    const lang = localStorage.getItem('miu_lang') || 'en';
+    const isAr = lang === 'ar';
+
+    list.innerHTML = menu.map((item, index) => {
+        const displayName = (isAr && item.arabicName) ? item.arabicName : item.name;
+        const displayCat = isAr ? (translations.ar[item.cat.toLowerCase() + 'Cat'] || item.cat) : item.cat;
+        
+        return `
+            <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-zinc-900/50 rounded-2xl border border-zinc-100 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-600 transition group">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-white dark:bg-zinc-800 rounded-xl flex items-center justify-center font-bold text-gray-400 border border-zinc-100 dark:border-zinc-800">
+                        ${index + 1}
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-zinc-900 dark:text-white">${displayName}</h4>
+                        <p class="text-xs text-zinc-500 uppercase font-semibold tracking-wider">${displayCat || 'Other'} • ${isAr ? 'ج.م ' : 'LE '}${item.price}</p>
+                    </div>
                 </div>
-                <div>
-                    <h4 class="font-bold text-gray-800 dark:text-white">${item.name}</h4>
-                    <p class="text-xs text-gray-500 uppercase font-semibold tracking-wider">${item.cat || 'Other'} • LE ${item.price}</p>
+                <div class="flex items-center gap-2">
+                    <button onclick="editMenuItem(${index})" class="p-2 text-zinc-400 hover:text-blue-500 transition opacity-0 group-hover:opacity-100">
+                        <i data-lucide="edit-3" class="w-5 h-5"></i>
+                    </button>
+                    <button onclick="deleteItem('${item.id}', '${item.name.replace(/'/g, "\\'")}')" class="p-2 text-zinc-400 hover:text-red-500 transition opacity-0 group-hover:opacity-100">
+                        <i data-lucide="trash-2" class="w-5 h-5"></i>
+                    </button>
                 </div>
             </div>
-            <div class="flex items-center gap-2">
-                <button onclick="editMenuItem(${index})" class="p-2 text-gray-400 hover:text-blue-500 transition opacity-0 group-hover:opacity-100">
-                    <i data-lucide="edit-3" class="w-5 h-5"></i>
-                </button>
-                <button onclick="deleteItem('${item.id}', '${item.name.replace(/'/g, "\\'")}')" class="p-2 text-gray-400 hover:text-red-500 transition opacity-0 group-hover:opacity-100">
-                    <i data-lucide="trash-2" class="w-5 h-5"></i>
-                </button>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
     
     if (window.lucide) lucide.createIcons();
 }
@@ -207,7 +215,8 @@ function editMenuItem(index) {
     document.getElementById('item-category').value = item.cat || 'Other';
     
     const btn = document.querySelector('#add-menu-form button[type="submit"]');
-    btn.innerText = "Update Item";
+    const lang = localStorage.getItem('miu_lang') || 'en';
+    btn.innerText = lang === 'ar' ? 'تحديث الصنف' : "Update Item";
     btn.classList.add('bg-blue-600');
     btn.classList.remove('miu-bg-red');
 
@@ -215,7 +224,8 @@ function editMenuItem(index) {
         const cancelBtn = document.createElement('button');
         cancelBtn.id = 'cancel-edit-btn';
         cancelBtn.type = 'button';
-        cancelBtn.innerText = "Cancel Edit";
+        const lang = localStorage.getItem('miu_lang') || 'en';
+        cancelBtn.innerText = lang === 'ar' ? 'إلغاء التعديل' : "Cancel Edit";
         cancelBtn.className = "w-full mt-2 bg-gray-500 text-white py-4 rounded-2xl font-bold hover:opacity-90 transition";
         cancelBtn.onclick = cancelEdit;
         btn.parentNode.appendChild(cancelBtn);
@@ -228,7 +238,8 @@ function cancelEdit() {
     editingIndex = null;
     document.getElementById('add-menu-form').reset();
     const btn = document.querySelector('#add-menu-form button[type="submit"]');
-    btn.innerText = "Add to Menu";
+    const lang = localStorage.getItem('miu_lang') || 'en';
+    btn.innerText = lang === 'ar' ? 'إضافة للمنيو' : "Add to Menu";
     btn.classList.remove('bg-blue-600');
     btn.classList.add('miu-bg-red');
     
@@ -445,4 +456,13 @@ document.addEventListener('DOMContentLoaded', () => {
     applyTranslations(currentLang);
     initAdmin();
     if (window.lucide) lucide.createIcons();
+});
+window.addEventListener('languageChanged', (e) => {
+    if (currentVenueData) {
+        renderMenuList(getSortedAdminMenu());
+        // Force re-apply translations for static elements
+        if (typeof applyTranslations === 'function') {
+            applyTranslations(e.detail.lang);
+        }
+    }
 });

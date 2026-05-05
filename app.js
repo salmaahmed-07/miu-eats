@@ -248,10 +248,16 @@ function renderGrid(containerId, items) {
         return;
     }
 
+    const lang = localStorage.getItem('miu_lang') || 'en';
+    const isAr = lang === 'ar';
+
     container.innerHTML = items.map((place, index) => {
         const isOpen = checkIfOpen(place.openingHours);
         const staggerDelay = index * 0.05;
         const logoId = `skeleton-logo-${place.id}`;
+        const displayName = (isAr && place.ar_name) ? place.ar_name : place.name;
+        const displayStatus = isAr ? (isOpen ? 'مفتوح' : 'مغلق') : (isOpen ? 'Open' : 'Closed');
+        
         return `
             <div class="place-card wow-card bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm" style="--delay: ${staggerDelay}" onclick="router.navigate('detail', { placeId: '${place.id}' })">
                 <div class="logo-circle skeleton" id="${logoId}">
@@ -261,13 +267,13 @@ function renderGrid(containerId, items) {
                 </div>
                 <div class="place-content">
                     <div class="place-header">
-                        <h3 class="place-title text-zinc-900 dark:text-white font-bold">${place.name}</h3>
-                        <span class="status-badge ${isOpen ? 'status-open' : 'status-closed'}">${isOpen ? 'Open' : 'Closed'}</span>
+                        <h3 class="place-title text-zinc-900 dark:text-white font-bold">${displayName}</h3>
+                        <span class="status-badge ${isOpen ? 'status-open' : 'status-closed'}">${displayStatus}</span>
                     </div>
                     <div class="place-info" style="margin-bottom: 4px;">
                         ${getBusynessIndicator(place)}
                     </div>
-                    <div class="price-range" style="font-size: 12px;">${place.priceRange}</div>
+                    <div class="price-range" style="font-size: 12px;">${isAr ? 'ج.م ' : 'LE '}${place.priceRange}</div>
                 </div>
             </div>
         `;
@@ -278,6 +284,12 @@ function renderDetail() {
     const place = currentState.places.find(p => p.id === currentState.selectedPlace);
     const container = document.getElementById('detail-content');
     if (!container) return;
+
+    // AI Translation Trigger
+    const lang = localStorage.getItem('miu_lang') || 'en';
+    if (lang === 'ar' && place.menu && place.menu.some(m => !m.ar_name)) {
+        batchTranslateMenu(place.id, place.menu);
+    }
 
     if (!place) {
         container.innerHTML = '<div style="padding: 40px; text-align: center;">Place not found.</div>';
@@ -306,7 +318,7 @@ function renderDetail() {
                     </div>
                     <div style="opacity: 0.9; margin-bottom: 12px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px;">
                         <div style="font-weight: 600; font-size: 14px; color: var(--text-color); opacity: 0.7;">
-                            ${place.category.toUpperCase()}
+                            ${lang === 'ar' ? (translations.ar[place.category.toLowerCase() + 'Cat'] || place.category).toUpperCase() : place.category.toUpperCase()}
                         </div>
                         ${getBusynessIndicator(place)}
                         <span class="status-badge ${isOpen ? 'status-open' : 'status-closed'}">${isOpen ? 'Open now' : 'Closed'}</span>
@@ -329,16 +341,20 @@ function renderDetail() {
             </div>
 
             <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 32px; margin-bottom: 16px;">
-                <h3 style="font-size: 22px; margin: 0; font-weight: 800;">Menu</h3>
+                <h3 style="font-size: 22px; margin: 0; font-weight: 800;" data-i18n="menu">Menu</h3>
                 <div class="relative inline-block w-64 group">
                     <!-- Custom Trigger Button -->
                     <button onclick="toggleSortDropdown()" id="sort-dropdown-trigger" 
                         class="flex items-center justify-between w-full bg-white border border-gray-200 text-gray-700 py-3 px-6 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 font-bold text-sm cursor-pointer hover:border-red-300 transition-all duration-300">
                         <span id="sort-current-label">${
-                            currentState.currentMenuSort === 'name-asc' ? 'A-Z (Name)' :
+                            isAr ? (currentState.currentMenuSort === 'name-asc' ? 'أ-ي (الاسم)' :
+                            currentState.currentMenuSort === 'price-asc' ? 'السعر: من الأقل للأعلى' :
+                            currentState.currentMenuSort === 'price-desc' ? 'السعر: من الأعلى للأقل' :
+                            'الأكثر تفضيلاً') :
+                            (currentState.currentMenuSort === 'name-asc' ? 'A-Z (Name)' :
                             currentState.currentMenuSort === 'price-asc' ? 'Price: Low to High' :
                             currentState.currentMenuSort === 'price-desc' ? 'Price: High to Low' :
-                            'Most Loved'
+                            'Most Loved')
                         }</span>
                         <svg class="w-4 h-4 text-gray-400 group-hover:text-red-500 transition-colors transform group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
@@ -465,17 +481,22 @@ function renderMenuItem(item, index) {
     const isFireDisabled = fireCooldown && (Date.now() - parseInt(fireCooldown)) < 60 * 60 * 1000;
     const isThumbDisabled = thumbCooldown && (Date.now() - parseInt(thumbCooldown)) < 60 * 60 * 1000;
 
+    const lang = localStorage.getItem('miu_lang') || 'en';
+    const isAr = lang === 'ar';
+    const displayName = (isAr && item.ar_name) ? item.ar_name : item.name;
+    const displayStatus = isAr ? 'غير متوفر' : 'Not Available';
+
     return `
         <div class="menu-item wow-menu-item${isPizzaUnavailable ? ' item-unavailable' : ''}" style="--delay: ${delay}">
             <div class="menu-item-info">
                 <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
                     <h4 style="margin:0; display:flex; align-items:center; gap:6px;">
-                        ${item.name}
+                        ${displayName}
                         <i data-lucide="info" style="width:16px; height:16px; opacity:0.5; cursor:pointer;" onclick="openQuickPeekMobile(event, '${safeName}', '${item.price}', '${safePlace}', '${safeCat}')"></i>
                     </h4>
-                    ${isPizzaUnavailable ? '<span class="badge-unavailable">Not Available</span>' : ''}
+                    ${isPizzaUnavailable ? `<span class="badge-unavailable">${displayStatus}</span>` : ''}
                 </div>
-                <div class="price-range">LE ${item.price}</div>
+                <div class="price-range">${isAr ? 'ج.م ' : 'LE '}${item.price}</div>
             </div>
             <div class="menu-item-actions">
                 <div class="reactions">
@@ -528,13 +549,15 @@ function getBusynessIndicator(place) {
     const isBusy = place.isBusy;
     const isForced = place.isForceBusy === true;
     
+    const lang = localStorage.getItem('miu_lang') || 'en';
+    const isAr = lang === 'ar';
+    
     let text, cssClass;
     if (isBusy) {
-        text = isForced ? 'Busy (Admin Force)' : 'Busy';
+        text = isForced ? (isAr ? 'مزدحم (قوة)' : 'Busy (Admin Force)') : (isAr ? 'مزدحم' : 'Busy');
         cssClass = 'status-red';
     } else {
-        // We could add a "yellow" state if votes are between 5-9, but following the "10+" rule:
-        text = 'Safe to Go';
+        text = isAr ? 'آمن للذهاب' : 'Safe to Go';
         cssClass = 'status-green';
     }
     
@@ -998,3 +1021,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+window.addEventListener('languageChanged', (e) => {
+    router.updateUI();
+});
+
+async function batchTranslateMenu(venueId, menu) {
+    const untranslated = menu.filter(m => !m.ar_name).map(m => m.name);
+    if (untranslated.length === 0) return;
+
+    const apiKey = sessionStorage.getItem('gemini_api_key');
+    if (!apiKey) return;
+
+    console.log(`🤖 AI: Translating menu for ${venueId}...`);
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: `Translate this list of menu items into Egyptian Arabic for a food app. Return only a JSON array of strings: ${JSON.stringify(untranslated)}` }]
+                }]
+            })
+        });
+
+        const result = await response.json();
+        const text = result.candidates[0].content.parts[0].text;
+        const cleanedText = text.replace(/```json|```/g, '').trim();
+        const translationsArray = JSON.parse(cleanedText);
+
+        const updatedMenu = menu.map(item => {
+            if (!item.ar_name) {
+                const translationIndex = untranslated.indexOf(item.name);
+                if (translationIndex !== -1 && translationsArray[translationIndex]) {
+                    return { ...item, ar_name: translationsArray[translationIndex] };
+                }
+            }
+            return item;
+        });
+
+        await db.collection('venues').doc(venueId).update({ menu: updatedMenu });
+        console.log(`✅ AI: Menu translated for ${venueId}`);
+        
+        // Re-render if we are still on the same place
+        if (currentState.selectedPlace === venueId) {
+            router.updateUI();
+        }
+    } catch (err) {
+        console.error("❌ AI Translation failed:", err);
+    }
+}

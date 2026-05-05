@@ -96,7 +96,7 @@
                     <!-- Busyness Control -->
                     <div class="bg-gray-50 dark:bg-gray-900/50 rounded-2xl p-6 border border-gray-100 dark:border-gray-700">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="font-semibold text-gray-700 dark:text-gray-300">Force Busy State</span>
+                            <span class="font-semibold text-gray-700 dark:text-gray-300" data-i18n="busyState">Force Busy State</span>
                             <label class="relative inline-flex items-center cursor-pointer">
                                 <input type="checkbox" id="force-busy-toggle" class="sr-only peer">
                                 <div class="w-11 h-6 bg-gray-200 dark:bg-gray-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all duration-300 peer-checked:miu-bg-red"></div>
@@ -107,7 +107,7 @@
                     <!-- Settings Button -->
                     <button onclick="openSettingsModal()" class="w-full mt-4 flex items-center justify-center gap-2 px-4 py-3 rounded-2xl bg-gray-50 dark:bg-gray-900/50 text-gray-600 dark:text-gray-400 font-bold border border-gray-100 dark:border-gray-700 hover:border-red-500/30 hover:text-red-600 transition-all active:scale-95">
                         <i data-lucide="settings" class="w-4 h-4"></i>
-                        Settings
+                        <span data-i18n="settings">Settings</span>
                     </button>
                 </div>
             </div>
@@ -120,13 +120,13 @@
                         <div class="p-3 miu-bg-red text-white rounded-2xl">
                             <i data-lucide="plus-circle" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Add New Menu Item</h3>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white" data-i18n="addMenuItem">Add New Menu Item</h3>
                     </div>
                     
                     <form id="add-menu-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div class="space-y-2">
                             <label class="text-sm font-semibold text-gray-600 dark:text-gray-400">Item Name</label>
-                            <input type="text" id="item-name" required placeholder="e.g. Spicy Zinger" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition">
+                            <input type="text" id="item-name" required data-i18n="spicyZingerPlaceholder" placeholder="e.g. Spicy Zinger" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 text-gray-900 dark:text-white focus:border-red-500 focus:ring-2 focus:ring-red-200 outline-none transition">
                         </div>
                         <div class="space-y-2">
                             <label class="text-sm font-semibold text-gray-600 dark:text-gray-400">Price (LE)</label>
@@ -144,7 +144,7 @@
                             </select>
                         </div>
                         <div class="sm:col-span-2 pt-2">
-                            <button id="add-item-btn" class="w-full miu-bg-red text-white font-bold py-4 rounded-2xl shadow-lg hover:shadow-xl hover:opacity-90 active:scale-[0.98] transition-all duration-300">
+                            <button id="add-item-btn" class="w-full miu-bg-red text-white font-bold py-4 rounded-2xl shadow-lg hover:shadow-xl hover:opacity-90 active:scale-[0.98] transition-all duration-300" data-i18n="addMenuItem">
                                 Add to Menu
                             </button>
                         </div>
@@ -241,26 +241,6 @@
     <script>
         // Init Lucide
         lucide.createIcons();
-
-        // i18n
-        let currentLang = localStorage.getItem('miu_lang') || 'en';
-        function applyTranslations(lang) {
-            document.documentElement.lang = lang;
-            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-            document.getElementById('langText').innerText = lang === 'en' ? 'AR' : 'EN';
-            
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang][key]) el.textContent = translations[lang][key];
-            });
-            if (window.lucide) lucide.createIcons();
-        }
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'ar' : 'en';
-            localStorage.setItem('miu_lang', currentLang);
-            applyTranslations(currentLang);
-        }
-        applyTranslations(currentLang);
     </script>
 </body>
 </html>
