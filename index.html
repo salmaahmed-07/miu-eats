@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIU Eats | Discover Campus Dining</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+
+<body>
+
+    <!-- Desktop Navigation -->
+    <nav class="navbar top-nav">
+        <div class="logo-container" onclick="router.goHome()">
+            <img src="logos/miu-logo.png" alt="MIU Logo" class="logo-img">
+        </div>
+        <div class="search-container">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" class="main-search" placeholder="Search for food or places..."
+                oninput="handleGlobalSearch(this.value)">
+        </div>
+        <div class="theme-switch magnetic" onclick="themeManager.toggle()">
+            <div class="circle">
+                <i data-lucide="sun" id="theme-icon-desktop" style="width: 14px; height: 14px;"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="navbar bottom-nav">
+        <div class="nav-item active" data-page="home" onclick="router.goHome()">
+            <i data-lucide="home"></i>
+            <span data-i18n="home">Home</span>
+        </div>
+        <div class="nav-item" onclick="toggleSettingsMenu()">
+            <i data-lucide="settings" id="settings-icon-mobile"></i>
+            <span data-i18n="settings">Settings</span>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Home Section -->
+        <section id="page-home" class="page-section">
+            <div class="hero">
+                <h1>Find your next meal on campus</h1>
+                <p>Discover the best food spots around MIU university</p>
+                <div class="btn-row">
+                    <button class="btn btn-surprise magnetic" onclick="surpriseMe()">
+                        <i data-lucide="sparkles"></i>
+                        Surprise Me
+                    </button>
+                    <button class="btn btn-surprise magnetic" style="background: var(--primary-red);"
+                        onclick="openBuildingModal()">
+                        <i data-lucide="map-pin"></i>
+                        Near Me
+                    </button>
+                </div>
+            </div>
+
+            <div id="home-categories-section">
+                <h3 style="margin: 30px 0 15px 0;">Explore Categories</h3>
+                <div class="category-filters home-filters">
+                    <div class="filter-chip active" data-category="all" onclick="filterByCategory('all')">All</div>
+                    <div class="filter-chip" data-category="food" onclick="filterByCategory('food')">Food Spots</div>
+                    <div class="filter-chip" data-category="dessert" onclick="filterByCategory('dessert')">Desserts
+                    </div>
+                    <div class="filter-chip" data-category="drinks" onclick="filterByCategory('drinks')">Drinks</div>
+                </div>
+                <div class="places-grid" id="home-grid">
+                    <!-- Cards will be injected here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section (Alias for home) -->
+        <section id="page-categories" class="page-section">
+        </section>
+
+        <!-- Near Me Section -->
+        <section id="page-nearme" class="page-section">
+            <div id="nearme-grid" class="places-grid"></div>
+        </section>
+
+        <!-- Detail View Section -->
+        <section id="page-detail" class="page-section detail-view">
+            <div class="back-btn" onclick="router.back()" data-i18n="back">
+                <i data-lucide="arrow-left"></i>
+                Back
+            </div>
+            <div id="detail-content">
+                <!-- Content will be injected here -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Building Selection Modal -->
+    <div id="building-modal" class="modal-overlay">
+        <div class="modal-content wide">
+            <h3 class="modal-title">Where are you?</h3>
+            <p class="modal-text">Select your building to find nearby food</p>
+
+            <div class="building-grid">
+                <label class="building-option">
+                    <input type="radio" name="building" value="MainK" onchange="selectBuilding('MainK')">
+                    <div class="building-label"><i data-lucide="landmark"></i>Main & K</div>
+                </label>
+                <label class="building-option">
+                    <input type="radio" name="building" value="Pharmacy" onchange="selectBuilding('Pharmacy')">
+                    <div class="building-label"><i data-lucide="pill"></i>Pharmacy</div>
+                </label>
+                <label class="building-option">
+                    <input type="radio" name="building" value="NS" onchange="selectBuilding('NS')">
+                    <div class="building-label"><i data-lucide="graduation-cap"></i>N & S</div>
+                </label>
+                <label class="building-option">
+                    <input type="radio" name="building" value="R" onchange="selectBuilding('R')">
+                    <div class="building-label"><i data-lucide="graduation-cap"></i>R</div>
+                </label>
+            </div>
+
+            <div class="modal-actions">
+                <button class="modal-btn btn-cancel" onclick="closeModals()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Surprise Modal -->
+    <div id="surprise-modal" class="modal-overlay">
+        <div class="modal-content">
+            <!-- Stage 1: Pick a vibe -->
+            <div id="surprise-stage-1">
+                <div style="font-size: 40px; margin-bottom: 16px;">🎲</div>
+                <h3 class="modal-title">What are you feeling?</h3>
+                <p class="modal-text" style="margin-bottom: 20px;">Pick a vibe and we'll find something for you</p>
+                <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px;">
+                    <button class="modal-btn btn-confirm" onclick="runSurprise('sweet')" style="background: #e91e8c;">
+                        Sweet</button>
+                    <button class="modal-btn btn-confirm" onclick="runSurprise('savory')"
+                        style="background: var(--primary-red);"> Savory</button>
+                    <button class="modal-btn btn-confirm" onclick="runSurprise('random')" style="background: #5c35d4;">
+                        Random</button>
+                </div>
+                <button class="modal-btn btn-cancel" onclick="closeModals()">Cancel</button>
+            </div>
+            <!-- Stage 2: Show the result -->
+            <div id="surprise-stage-2" style="display:none;">
+                <div id="modal-icon" style="font-size: 40px; margin-bottom: 16px;">😋</div>
+                <h3 class="modal-title">Check this out!</h3>
+                <p id="modal-message" class="modal-text">How about some delicious food?</p>
+                <div class="modal-actions">
+                    <button class="modal-btn btn-cancel" onclick="surpriseBack()">← Back</button>
+                    <button class="modal-btn btn-confirm" id="modal-confirm-btn">Check it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vote Modal -->
+    <div class="modal-overlay" id="vote-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">Vote Busyness</h2>
+            <p class="modal-text" style="margin-bottom: 16px;">Vote if the place is busy or not.</p>
+            <div style="display: flex; flex-direction: row; justify-content: center; gap: 24px; margin-bottom: 24px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" name="busyness-vote" value="busy" style="width: 18px; height: 18px;">
+                    <span style="font-size: 16px; font-weight: 500;">Busy</span>
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                    <input type="radio" name="busyness-vote" value="not-busy" style="width: 18px; height: 18px;">
+                    <span style="font-size: 16px; font-weight: 500;">Not Busy</span>
+                </label>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn btn-cancel" onclick="closeVoteModal()">Cancel</button>
+                <button class="modal-btn btn-confirm" onclick="submitVote()">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Peek Modal -->
+    <div id="quick-peek-modal" class="quick-peek-overlay" onclick="if(event.target===this) closeQuickPeek()">
+        <div class="quick-peek-popup">
+            <div id="quick-peek-content">
+                <!-- Content injected via JS -->
+            </div>
+            <button class="modal-btn btn-cancel" style="width: 100%; margin-top: 16px;"
+                onclick="closeQuickPeek()">Close</button>
+        </div>
+    </div>
+
+    <!-- Settings Menu Popup -->
+    <div id="settings-menu" class="settings-overlay" onclick="if(event.target===this) toggleSettingsMenu()">
+        <div class="settings-popup">
+            <button class="settings-action-btn" onclick="toggleLanguage(); toggleSettingsMenu()">
+                <i data-lucide="languages"></i>
+                <span data-i18n="translateBtn" id="translate-btn-text">Translate to Arabic</span>
+            </button>
+            <button class="settings-action-btn" onclick="themeManager.toggle(); toggleSettingsMenu()">
+                <i data-lucide="moon" id="theme-icon-popup"></i>
+                <span data-i18n="themeBtn">Theme Options</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase v8 Compat SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <script src="app.js?v=5"></script>
+</body>
+
+</html>
