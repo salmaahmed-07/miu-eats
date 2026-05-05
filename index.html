@@ -23,7 +23,7 @@
     <script src="translations.js"></script>
 </head>
 
-<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300 flex flex-col min-h-screen">
 
 
     <!-- Header Wrapper for Fixed Positioning -->
@@ -86,7 +86,7 @@
         </div>
     </nav>
 
-    <main class="container">
+    <main class="container flex-grow mb-12">
 
         <!-- Home Section -->
         <section id="page-home" class="page-section">
@@ -274,6 +274,52 @@
                 <i data-lucide="moon" id="theme-icon-popup"></i>
                 <span data-i18n="themeBtn">Theme Options</span>
             </button>
+        </div>
+    </div>
+
+    <!-- Developed by SSN Footer -->
+    <footer class="mt-auto py-8 pb-24 md:pb-8 text-center w-full">
+        <button id="ssn-btn" class="mx-auto text-zinc-500 hover:text-zinc-800 dark:hover:text-white text-sm relative z-50 cursor-pointer flex items-center gap-2 transition-colors duration-300">
+            <i data-lucide="code" class="w-4 h-4"></i>
+            <span>Developed by SSN</span>
+        </button>
+    </footer>
+
+    <!-- SSN Developer Modal -->
+    <div id="ssn-modal" class="fixed inset-0 z-[300] hidden flex items-center justify-center bg-black/60 backdrop-blur-md p-4 transition-all duration-300">
+        <div class="bg-white dark:bg-zinc-900 w-full max-w-md rounded-3xl shadow-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 transform transition-all duration-300 scale-95 opacity-0">
+            <div class="p-6 border-b border-zinc-100 dark:border-zinc-800 flex justify-between items-center">
+                <h3 class="text-xl font-bold text-zinc-900 dark:text-white">Meet the Developers</h3>
+                <button onclick="closeSSNModal()" class="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
+                    <i data-lucide="x" class="w-5 h-5 text-zinc-500"></i>
+                </button>
+            </div>
+            <div class="p-6 space-y-4">
+                <a href="https://www.linkedin.com/in/salma-ahmed-370751315" target="_blank" class="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">SA</div>
+                        <span class="font-semibold text-zinc-900 dark:text-zinc-100">Eng. Salma Ahmed</span>
+                    </div>
+                    <i data-lucide="linkedin" class="w-5 h-5 text-[#0077b5] group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="https://eg.linkedin.com/in/norhan-hazem-ba700838b" target="_blank" class="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold">NH</div>
+                        <span class="font-semibold text-zinc-900 dark:text-zinc-100">Eng. Norhan Hazem</span>
+                    </div>
+                    <i data-lucide="linkedin" class="w-5 h-5 text-[#0077b5] group-hover:scale-110 transition-transform"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/eng-salma-elhefnawi" target="_blank" class="flex items-center justify-between p-4 bg-zinc-50 dark:bg-zinc-800/50 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 transition-all group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white font-bold">SE</div>
+                        <span class="font-semibold text-zinc-900 dark:text-zinc-100">Eng. Salma Elhefnawi</span>
+                    </div>
+                    <i data-lucide="linkedin" class="w-5 h-5 text-[#0077b5] group-hover:scale-110 transition-transform"></i>
+                </a>
+            </div>
+            <div class="p-4 bg-zinc-50 dark:bg-zinc-800/30 text-center text-xs text-zinc-500 uppercase tracking-widest font-bold">
+                MIU Eats &copy; 2026
+            </div>
         </div>
     </div>
 

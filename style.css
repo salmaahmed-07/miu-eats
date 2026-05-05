@@ -81,7 +81,7 @@ a {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 24px 144px 24px; /* Heavy padding for bottom-nav clearance */
+    padding: 0 24px 48px 24px; /* Reduced bottom padding */
 }
 
 @media (min-width: 768px) {

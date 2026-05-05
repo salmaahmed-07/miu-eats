@@ -287,6 +287,7 @@ function renderDetail() {
 
     // AI Translation Trigger
     const lang = localStorage.getItem('miu_lang') || 'en';
+    const isAr = lang === 'ar';
     if (lang === 'ar' && place.menu && place.menu.some(m => !m.ar_name)) {
         batchTranslateMenu(place.id, place.menu);
     }
@@ -1017,7 +1018,42 @@ function toggleSettingsMenu() {
 // Ensure translations are applied on load
 document.addEventListener('DOMContentLoaded', () => {
     applyTranslations(currentLang);
+    
+    // SSN Button Logic (Safely Appended)
+    const ssnBtn = document.getElementById('ssn-btn');
+    if (ssnBtn) {
+        ssnBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const modal = document.getElementById('ssn-modal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    const content = modal.querySelector('div');
+                    if (content) content.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            }
+        });
+    }
+
+    // SSN Modal Close Logic
+    const ssnModal = document.getElementById('ssn-modal');
+    if (ssnModal) {
+        ssnModal.addEventListener('click', (e) => {
+            if (e.target === ssnModal) closeSSNModal();
+        });
+    }
 });
+
+function closeSSNModal() {
+    const modal = document.getElementById('ssn-modal');
+    if (modal) {
+        const content = modal.querySelector('div');
+        if (content) content.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+}
 
 
 
