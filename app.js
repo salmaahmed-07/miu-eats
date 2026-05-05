@@ -229,28 +229,6 @@ const router = {
     }
 };
 
-/**
- * Theme Manager
- */
-const themeManager = {
-    isDark: false,
-    toggle() {
-        this.isDark = !this.isDark;
-        document.body.classList.toggle('dark-theme', this.isDark);
-
-        const iconDesktop = document.getElementById('theme-icon-desktop');
-        const iconPopup = document.getElementById('theme-icon-popup');
-
-        if (this.isDark) {
-            if (iconDesktop) iconDesktop.setAttribute('data-lucide', 'moon');
-            if (iconPopup) iconPopup.setAttribute('data-lucide', 'sun');
-        } else {
-            if (iconDesktop) iconDesktop.setAttribute('data-lucide', 'sun');
-            if (iconPopup) iconPopup.setAttribute('data-lucide', 'moon');
-        }
-        if (window.lucide) lucide.createIcons();
-    }
-};
 
 /**
  * Rendering Logic
@@ -275,7 +253,7 @@ function renderGrid(containerId, items) {
         const staggerDelay = index * 0.05;
         const logoId = `skeleton-logo-${place.id}`;
         return `
-            <div class="place-card wow-card" style="--delay: ${staggerDelay}" onclick="router.navigate('detail', { placeId: '${place.id}' })">
+            <div class="place-card wow-card bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm" style="--delay: ${staggerDelay}" onclick="router.navigate('detail', { placeId: '${place.id}' })">
                 <div class="logo-circle skeleton" id="${logoId}">
                     <img src="${place.image}" alt="${place.name}" class="place-img" 
                          onload="document.getElementById('${logoId}')?.classList.remove('skeleton')" 
@@ -283,7 +261,7 @@ function renderGrid(containerId, items) {
                 </div>
                 <div class="place-content">
                     <div class="place-header">
-                        <h3 class="place-title">${place.name}</h3>
+                        <h3 class="place-title text-zinc-900 dark:text-white font-bold">${place.name}</h3>
                         <span class="status-badge ${isOpen ? 'status-open' : 'status-closed'}">${isOpen ? 'Open' : 'Closed'}</span>
                     </div>
                     <div class="place-info" style="margin-bottom: 4px;">
@@ -317,7 +295,7 @@ function renderDetail() {
                 </div>
                 <div>
                     <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 4px; flex-wrap: wrap;">
-                        <h1 style="font-size: 28px; margin: 0; line-height: 1.1;">${place.name}</h1>
+                        <h1 class="text-zinc-900 dark:text-white" style="font-size: 28px; margin: 0; line-height: 1.1;">${place.name}</h1>
                         ${((() => {
                             const lastVoted = localStorage.getItem(`lastVoted_${place.id}`);
                             const voteDisabled = lastVoted && (Date.now() - parseInt(lastVoted)) < 10 * 60 * 1000;

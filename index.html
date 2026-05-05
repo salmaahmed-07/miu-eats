@@ -15,20 +15,21 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: ['class', '.dark-theme'],
+            darkMode: 'class',
         }
     </script>
+    <script src="theme.js"></script>
     <link rel="stylesheet" href="style.css?v=6">
     <script src="translations.js"></script>
 </head>
 
-<body>
+<body class="bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
 
 
     <!-- Header Wrapper for Fixed Positioning -->
     <header class="fixed top-0 left-0 right-0 z-[50] w-full pointer-events-none">
         <!-- Desktop Navigation (Modern Floating Glassmorphic) -->
-        <nav class="mt-2 mx-auto w-[95%] bg-white/70 dark:bg-[#1e1e1e]/70 backdrop-blur-md border border-white/20 dark:border-gray-800/50 rounded-[2rem] shadow-lg transition-all duration-300 pointer-events-auto">
+        <nav class="mt-2 mx-auto w-[95%] bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-md border border-white/20 dark:border-zinc-800/50 rounded-[2rem] shadow-lg transition-all duration-300 pointer-events-auto">
           <div class="px-6 sm:px-8">
             <div class="flex justify-between items-center h-16 gap-4">
           
@@ -43,7 +44,7 @@
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <svg class="h-4 w-4 text-gray-400 group-focus-within:text-red-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
               </div>
-              <input type="text" data-i18n="searchPlaceholder" class="block w-full pl-9 pr-3 py-2 border border-transparent rounded-full leading-5 bg-gray-100/50 dark:bg-[#1e1e1e]/50 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:outline-none focus:bg-white dark:focus:bg-[#2a2a2a] focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300 text-sm" placeholder="Search..." 
+              <input type="text" data-i18n="searchPlaceholder" class="block w-full pl-9 pr-3 py-2 border border-transparent rounded-full leading-5 bg-zinc-100/50 dark:bg-zinc-900/50 text-gray-900 dark:text-gray-100 placeholder-gray-500 focus:outline-none focus:bg-white dark:focus:bg-[#2a2a2a] focus:border-red-500 focus:ring-2 focus:ring-red-500/20 transition-all duration-300 text-sm" placeholder="Search..." 
                      oninput="handleGlobalSearch(this.value, event)"
                      onkeydown="if(event.key==='Enter') handleGlobalSearch(this.value, event)">
             </div>
@@ -62,7 +63,7 @@
             <div class="theme-toggle-wrapper">
                 <div class="theme-switch magnetic" onclick="themeManager.toggle()">
                     <div class="circle">
-                        <i data-lucide="sun" id="theme-icon-desktop" style="width: 14px; height: 14px;"></i>
+                        <i data-lucide="sun" id="themeToggle" style="width: 14px; height: 14px;"></i>
                     </div>
                 </div>
             </div>
@@ -130,10 +131,10 @@
         </section>
 
     <!-- Restaurant Detail Modal (Full-Screen Overlay with Grow & Fade) -->
-    <div id="page-detail" class="fixed inset-0 z-[200] hidden bg-[#f9fafb] dark:bg-[#121212] transition-all duration-500 ease-out opacity-0 pointer-events-none overflow-y-auto page-section">
+    <div id="page-detail" class="fixed inset-0 z-[200] hidden bg-zinc-50 dark:bg-black transition-all duration-500 ease-out opacity-0 pointer-events-none overflow-y-auto page-section">
         <div class="max-w-5xl mx-auto p-6 md:p-12 pb-32 transform scale-95 transition-transform duration-500 ease-out">
             <div class="flex justify-between items-center mb-10">
-                <button id="backBtn" onclick="router.back()" class="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 font-bold transition-all active:scale-95">
+                <button id="backBtn" onclick="router.back()" class="flex items-center gap-2 text-zinc-600 dark:text-zinc-300 hover:text-red-600 dark:hover:text-red-400 font-bold transition-all active:scale-95">
                   <i data-lucide="chevron-left" class="w-6 h-6"></i>
                   <span class="text-lg">Back</span>
                 </button>
@@ -265,12 +266,12 @@
 
     <!-- Settings Menu Popup -->
     <div id="settings-menu" class="settings-overlay" onclick="if(event.target===this) toggleSettingsMenu()">
-        <div class="settings-popup">
-            <button class="settings-action-btn" onclick="toggleLanguage(); toggleSettingsMenu()">
+        <div class="settings-popup bg-white dark:bg-zinc-900 border border-gray-100 dark:border-zinc-800">
+            <button class="settings-action-btn hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-700 dark:text-gray-200" onclick="toggleLanguage(); toggleSettingsMenu()">
                 <i data-lucide="languages"></i>
                 <span data-i18n="translateBtn" id="translate-btn-text">Translate to Arabic</span>
             </button>
-            <button class="settings-action-btn" onclick="themeManager.toggle(); toggleSettingsMenu()">
+            <button class="settings-action-btn hover:bg-gray-50 dark:hover:bg-zinc-800 text-gray-700 dark:text-gray-200" onclick="themeManager.toggle(); toggleSettingsMenu()">
                 <i data-lucide="moon" id="theme-icon-popup"></i>
                 <span data-i18n="themeBtn">Theme Options</span>
             </button>

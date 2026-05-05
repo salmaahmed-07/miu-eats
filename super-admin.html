@@ -10,9 +10,13 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = { darkMode: ['class', '.dark-theme'] }
+        tailwind.config = {
+            darkMode: 'class',
+        }
     </script>
+    <script src="theme.js"></script>
     <script src="translations.js"></script>
     <link rel="stylesheet" href="style.css?v=6">
     <style>
@@ -26,10 +30,10 @@
         }
     </script>
 </head>
-<body class="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-[#121212]">
+<body class="min-h-screen transition-colors duration-300 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
 
     <header class="fixed top-0 left-0 right-0 z-[100] w-full pointer-events-none">
-        <nav class="mt-2 mx-auto w-[95%] bg-white/70 dark:bg-[#1e1e1e]/70 backdrop-blur-md border border-white/20 dark:border-gray-800/50 rounded-[2rem] shadow-lg transition-all duration-300 pointer-events-auto">
+        <nav class="mt-2 mx-auto w-[95%] bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-md border border-white/20 dark:border-zinc-800/50 rounded-[2rem] shadow-lg transition-all duration-300 pointer-events-auto">
           <div class="px-3 sm:px-8">
             <div class="flex justify-between items-center h-16 gap-4">
               <div class="flex items-center gap-4">
@@ -47,12 +51,12 @@
                   <i data-lucide="globe" class="w-5 h-5"></i>
                   <span id="langText" class="font-bold text-sm tracking-wide">EN</span>
                 </button>
-                <button onclick="themeManager.toggle()" class="p-2 rounded-2xl bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    <i data-lucide="sun" id="theme-icon-desktop" class="w-5 h-5"></i>
+                <button onclick="themeManager.toggle()" class="p-2 rounded-2xl bg-white dark:bg-zinc-900 text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                    <i data-lucide="sun" id="themeToggle" class="w-5 h-5"></i>
                 </button>
                 <div class="relative group">
                     <input type="password" id="gemini-api-key" placeholder="Gemini API Key" 
-                           class="w-32 sm:w-48 px-3 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 border-none text-xs font-bold focus:ring-2 focus:ring-red-500 transition-all"
+                           class="w-32 sm:w-48 px-3 py-2 rounded-xl bg-zinc-100 dark:bg-zinc-800 border-none text-xs font-bold focus:ring-2 focus:ring-red-500 transition-all"
                            onchange="saveApiKey(this.value)">
                     <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gray-900 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
                         Required for Auto-Scan
@@ -71,10 +75,10 @@
     <main class="max-w-7xl mx-auto pt-32 px-4 md:px-8 pb-36 space-y-10">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
             <div>
-                <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2" data-i18n="superAdminDashboard">Super Admin Dashboard</h1>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white mb-2" data-i18n="superAdminDashboard">Super Admin Dashboard</h1>
                 <p class="text-gray-500 dark:text-gray-400 font-medium text-sm sm:text-base" data-i18n="manageVendorsDesc">Centralized oversight for all university dining facilities</p>
             </div>
-            <div class="bg-white dark:bg-gray-800 px-6 py-3 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+            <div class="bg-white dark:bg-zinc-900 px-6 py-3 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 flex items-center gap-4">
                 <div class="text-center">
                     <span id="vendor-count" class="block text-2xl font-black text-gray-900 dark:text-white">0</span>
                     <span class="text-[10px] uppercase tracking-tighter text-gray-400 font-bold" data-i18n="totalVendors">Total Vendors</span>
@@ -92,7 +96,7 @@
     </main>
 
     <div id="vendor-modal" class="fixed inset-0 z-[150] hidden flex items-center justify-center bg-black/40 backdrop-blur-xl transition-all duration-300 opacity-0 overflow-y-auto">
-        <div class="bg-white dark:bg-[#1e1e1e] rounded-[2.5rem] p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl border border-white/10 transform scale-95 transition-all max-h-[90vh] overflow-y-auto">
+        <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-6 sm:p-8 max-w-md w-full mx-4 shadow-2xl border border-white/10 dark:border-zinc-800 transform scale-95 transition-all max-h-[90vh] overflow-y-auto">
             <h3 id="modal-title" class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Add New Vendor</h3>
             <div class="space-y-4">
                 <input type="hidden" id="edit-id">
@@ -174,7 +178,7 @@
 
     <!-- Custom Dialog Modal -->
     <div id="custom-dialog" class="fixed inset-0 z-[1000] hidden items-center justify-center bg-black/60 backdrop-blur-md transition-all duration-300 opacity-0">
-        <div class="bg-white dark:bg-[#1e1e1e] rounded-[2.5rem] p-8 max-w-sm w-full mx-4 shadow-2xl border border-white/10 transform scale-95 transition-all text-center">
+        <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-8 max-w-sm w-full mx-4 shadow-2xl border border-white/10 dark:border-zinc-800 transform scale-95 transition-all text-center">
             <div id="dialog-icon-container" class="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center text-red-500 bg-red-50 dark:bg-red-900/20">
                 <i data-lucide="alert-triangle" class="w-8 h-8"></i>
             </div>
@@ -190,25 +194,6 @@
 
     <script src="firebase-config.js"></script>
     <script>
-        const themeManager = {
-            isDark: localStorage.getItem('miu_theme') === 'dark',
-            init() {
-                if (this.isDark) document.body.classList.add('dark-theme');
-                this.updateIcons();
-            },
-            toggle() {
-                this.isDark = !this.isDark;
-                document.body.classList.toggle('dark-theme', this.isDark);
-                localStorage.setItem('miu_theme', this.isDark ? 'dark' : 'light');
-                this.updateIcons();
-            },
-            updateIcons() {
-                const icon = document.getElementById('theme-icon-desktop');
-                if (icon) icon.setAttribute('data-lucide', this.isDark ? 'moon' : 'sun');
-                if (window.lucide) lucide.createIcons();
-            }
-        };
-        themeManager.init();
 
         // Load API Key from session storage on init
         document.addEventListener('DOMContentLoaded', () => {
@@ -270,7 +255,7 @@
                 return;
             }
             grid.innerHTML = vendors.map(v => `
-                <div class="bg-white dark:bg-gray-800 rounded-[2.5rem] p-6 shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col justify-between hover:shadow-xl transition-all duration-300">
+                <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-6 shadow-sm border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between hover:shadow-xl transition-all duration-300">
                     <div>
                         <div class="flex items-center justify-between mb-6">
                             <div class="w-16 h-16 rounded-2xl overflow-hidden bg-gray-50 border border-gray-100 shadow-sm">
@@ -280,15 +265,15 @@
                                 <i data-lucide="edit-3" class="w-5 h-5"></i>
                             </button>
                         </div>
-                        <h3 class="font-bold text-xl text-gray-900 dark:text-white mb-1">${v.name}</h3>
+                        <h3 class="font-bold text-xl text-zinc-900 dark:text-white mb-1">${v.name}</h3>
                         <div class="flex items-center gap-2 mb-6">
-                            <span class="px-2 py-0.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-[10px] font-black uppercase text-gray-500">${v.category}</span>
+                            <span class="px-2 py-0.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-[10px] font-black uppercase text-zinc-500">${v.category}</span>
                             <span class="text-xs font-bold ${v.isHidden ? 'text-red-500' : 'text-green-500'}">
                                 ${v.isHidden ? 'Hidden' : 'Visible'}
                             </span>
                         </div>
                     </div>
-                    <div class="space-y-3 pt-6 border-t border-gray-50 dark:border-gray-700">
+                    <div class="space-y-3 pt-6 border-t border-zinc-100 dark:border-zinc-800">
                         <div class="flex gap-2">
                             <button onclick="toggleVisibility('${v.id}', ${v.isHidden || false})" 
                                     class="flex-1 flex items-center justify-center gap-2 p-3 rounded-2xl font-bold text-xs transition-all ${v.isHidden ? 'bg-green-50 text-green-600' : 'bg-orange-50 text-orange-600'}">

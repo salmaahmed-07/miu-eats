@@ -260,29 +260,6 @@ function showToast(msg, isError = false) {
 }
 
 
-/**
- * Theme Manager (Synced with index.html)
- */
-const themeManager = {
-    isDark: false,
-    toggle() {
-        this.isDark = !this.isDark;
-        document.body.classList.toggle('dark-theme', this.isDark);
-        localStorage.setItem('miu_dark', this.isDark);
-        
-        const icon = document.getElementById('theme-icon-desktop');
-        if (icon) {
-            icon.setAttribute('data-lucide', this.isDark ? 'moon' : 'sun');
-            if (window.lucide) lucide.createIcons();
-        }
-    },
-    load() {
-        this.isDark = localStorage.getItem('miu_dark') === 'true';
-        document.body.classList.toggle('dark-theme', this.isDark);
-        const icon = document.getElementById('theme-icon-desktop');
-        if (icon) icon.setAttribute('data-lucide', this.isDark ? 'moon' : 'sun');
-    }
-};
 
 /**
  * i18n Refactor (Synced with app.js)
@@ -465,7 +442,6 @@ function toBase64(file) {
 
 // Start
 document.addEventListener('DOMContentLoaded', () => {
-    themeManager.load();
     applyTranslations(currentLang);
     initAdmin();
     if (window.lucide) lucide.createIcons();

@@ -8,11 +8,13 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            darkMode: ['class', '.dark-theme'],
+            darkMode: 'class',
         }
     </script>
+    <script src="theme.js"></script>
     <script src="translations.js"></script>
     <link rel="stylesheet" href="style.css?v=6">
     <style>
@@ -21,10 +23,10 @@
         .miu-bg-red { background-color: #e31e24; }
     </style>
 </head>
-<body class="min-h-screen transition-colors duration-300 bg-gray-50 dark:bg-[#121212]">
+<body class="min-h-screen transition-colors duration-300 bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100">
 
     <!-- Auth Guard Overlay -->
-    <div id="access-denied" class="fixed inset-0 bg-white dark:bg-[#121212] z-[200] flex items-center justify-center p-6 hidden">
+    <div id="access-denied" class="fixed inset-0 bg-white dark:bg-black z-[200] flex items-center justify-center p-6 hidden">
         <div class="text-center max-w-md">
             <div class="w-20 h-20 bg-red-50 dark:bg-red-900/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
                 <i data-lucide="shield-alert" class="w-10 h-10 text-red-600"></i>
@@ -40,7 +42,7 @@
 
     <!-- Header Wrapper for Fixed Positioning -->
     <header class="fixed top-0 left-0 right-0 z-[100] w-full pointer-events-none">
-        <nav class="mt-2 mx-auto w-[95%] bg-white/70 dark:bg-[#1e1e1e]/70 backdrop-blur-md border border-white/20 dark:border-gray-800/50 rounded-[2rem] shadow-lg transition-all duration-300 pointer-events-auto">
+        <nav class="mt-2 mx-auto w-[95%] bg-zinc-100/80 dark:bg-zinc-900/80 backdrop-blur-md border border-white/20 dark:border-zinc-800/50 rounded-[2rem] shadow-lg transition-all duration-300 pointer-events-auto">
           <div class="px-3 sm:px-8">
             <div class="flex justify-between items-center h-16 gap-4">
               
@@ -60,8 +62,8 @@
                 </button>
 
                 <!-- Dark Mode Toggle -->
-                <button onclick="themeManager.toggle()" class="p-2 rounded-2xl bg-gray-50 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
-                    <i data-lucide="sun" id="theme-icon-desktop" class="w-5 h-5"></i>
+                <button onclick="themeManager.toggle()" class="p-2 rounded-2xl bg-white dark:bg-zinc-900 text-gray-600 dark:text-gray-300 border border-gray-100 dark:border-zinc-800 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                    <i data-lucide="sun" id="themeToggle" class="w-5 h-5"></i>
                 </button>
 
                 <div class="w-px h-6 bg-gray-200 dark:bg-gray-700 mx-1"></div>
@@ -84,7 +86,7 @@
             <!-- Sidebar (Venue Profile) -->
             <div class="w-full md:w-1/3 lg:w-1/4 space-y-6 md:sticky md:top-32 flex-shrink-0">
                 <!-- Venue Profile Card -->
-                <div class="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-sm border border-gray-100 dark:border-gray-700 text-center">
+                <div class="bg-white dark:bg-zinc-900 rounded-3xl p-8 shadow-sm border border-zinc-200 dark:border-zinc-800 text-center">
                     <div class="w-32 h-32 mx-auto rounded-full border-4 border-gray-50 dark:border-gray-700 overflow-hidden mb-6 shadow-lg">
                         <img id="venue-logo" src="logos/miu-logo.png" alt="Venue" class="w-full h-full object-cover">
                     </div>
@@ -239,27 +241,6 @@
     <script>
         // Init Lucide
         lucide.createIcons();
-        
-        // Theme Manager
-        const themeManager = {
-            isDark: localStorage.getItem('miu_theme') === 'dark',
-            init() {
-                if (this.isDark) document.body.classList.add('dark-theme');
-                this.updateIcons();
-            },
-            toggle() {
-                this.isDark = !this.isDark;
-                document.body.classList.toggle('dark-theme', this.isDark);
-                localStorage.setItem('miu_theme', this.isDark ? 'dark' : 'light');
-                this.updateIcons();
-            },
-            updateIcons() {
-                const icon = document.getElementById('theme-icon-desktop');
-                if (icon) icon.setAttribute('data-lucide', this.isDark ? 'moon' : 'sun');
-                if (window.lucide) lucide.createIcons();
-            }
-        };
-        themeManager.init();
 
         // i18n
         let currentLang = localStorage.getItem('miu_lang') || 'en';
